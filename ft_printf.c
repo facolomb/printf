@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
+#include <stdio.h>
 
 int	ft_manage_flags(const char *str, va_list *params, int i)
 {
@@ -33,7 +34,7 @@ int	ft_manage_flags(const char *str, va_list *params, int i)
 	else if (str[i] == 'X')
 		size += ft_itohex((unsigned int) va_arg(*params, unsigned int), 'X');
 	else
-		size = -1;
+		return (-1);
 	return (size);
 }
 
@@ -42,10 +43,12 @@ int	ft_printf(const char *s, ...)
 	char	*str;
 	int		i;
 	int		count;
+	int		is_flag_unkown;
 	va_list	params;
 
 	i = 0;
 	count = 0;
+	is_flag_unkown = -1;
 	str = (char *)s;
 	va_start(params, s);
 	while (str[i] != '\0')
@@ -54,10 +57,15 @@ int	ft_printf(const char *s, ...)
 		{
 			i++;
 			count += ft_manage_flags(str, &params, i);
+			if (count < is_flag_unkown)
+			{
+				return (-1);
+			}
 		}
 		else
 			count += ft_putchar(str[i]);
 		i++;
+		is_flag_unkown = count;
 	}
 	va_end(params);
 	return (count);

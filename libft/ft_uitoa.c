@@ -56,6 +56,7 @@ int	ft_uitoa(unsigned int n)
 		return (ft_putstr(str));
 	}
 	str = ft_convert_ui_to_c(str, n, len);
+	len = ft_putstr(str);
 	free(str);
-	return (ft_putstr(str));
+	return (len);
 }

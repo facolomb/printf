@@ -68,6 +68,7 @@ int	ft_itoa(int n)
 		return (ft_putstr(str));
 	}
 	str = ft_convert_i_to_c(str, n, len);
+	len = ft_putstr(str);
 	free(str);
-	return (ft_putstr(str));
+	return (len);
 }
