@@ -51,9 +51,8 @@ int	ft_uitoa(unsigned int n)
 	str[len--] = '\0';
 	if (n == 0)
 	{
-		str[0] = '0';
 		free(str);
-		return (ft_putstr(str));
+		return (ft_putchar('0'));
 	}
 	str = ft_convert_ui_to_c(str, n, len);
 	len = ft_putstr(str);
